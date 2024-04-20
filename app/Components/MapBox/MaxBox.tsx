@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/context/globalContext";
 
+//@ts-ignore
 function FlyToActiveCity({ activeCityCords }: any) {
   const map = useMap();
 
@@ -39,6 +40,7 @@ function Mapbox() {
   }
 
   return (
+    //@ts-ignore
     <div className="flex-1 basis-[50%] border rounded-lg">
       <MapContainer
         center={[activeCityCords.lat, activeCityCords.lon]}
