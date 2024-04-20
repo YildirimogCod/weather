@@ -2,7 +2,7 @@
 
 import { useGlobalContext } from "@/app/context/globalContext";
 import { kelvinToCelcius } from "@/app/utils/misc";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   clearSky,
   cloudy,
@@ -11,12 +11,22 @@ import {
   rain,
   snow,
 } from "@/app/utils/Icon";
+import moment from "moment";
 const Temperature = () => {
   const [localTime, setLocalTime] = useState<string>("");
   const [currentDay, setCurrentDay] = useState<string>("");
   const { foreCast } = useGlobalContext();
   const { main, timezone, name, weather } = foreCast;
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const localMoment = moment().utcOffset(timezone / 60);
+      const formattedTime = localMoment.format("HH:mm:ss");
+      const day = localMoment.format("dddd");
+      setLocalTime(formattedTime);
+      setCurrentDay(day);
+    }, 1000);
+  }, []);
   if (!foreCast || !weather) return <div>Loading</div>;
 
   const temp = kelvinToCelcius(main?.temp);
@@ -41,14 +51,27 @@ const Temperature = () => {
     }
   };
 
-  switch (weather) {
-  }
   return (
-    <div className="pt-6 pb-5 border rounded-lg flex flex-col justify-between dark:bg-dark-grey shadow-sm dark:shadow-none">
+    <div className="pt-6 pb-5 px-3 border rounded-lg flex flex-col justify-between dark:bg-dark-grey shadow-sm dark:shadow-none">
       <p className="flex justify-between items-center">
         <span className="font-medium">{currentDay}</span>
         <span className="font-medium">{localTime}</span>
       </p>
+      <p className="pt2 flex items-center gap-1 font-bold">
+        <span>{name}</span>
+        <span>{navigation}</span>
+      </p>
+      <p className="py-6 text-9xl font-bold text-center">{temp}°</p>
+      <div>
+        <div>
+          <span>{getIcon()}</span>
+          <p className="pt-2 capitalize text-lg font-medium">{description}</p>
+        </div>
+        <p className="flex gap-2 items-center">
+          <span>Low: {minTemp}°</span>
+          <span>High: {maxTemp}°</span>
+        </p>
+      </div>
     </div>
   );
 };
