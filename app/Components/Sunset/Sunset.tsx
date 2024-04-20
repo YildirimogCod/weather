@@ -15,7 +15,7 @@ const Sunset = () => {
 
   const sunsetTime = unixToTime(times, timezone);
   const sunrise = unixToTime(foreCast?.sys?.sunrise, timezone);
-  console.log(times, timezone, sunrise);
+
   return (
     <div className="pt-6 pb-5 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 dark:bg-dark-grey shadow-sm dark:shadow-none">
       <div className="top">

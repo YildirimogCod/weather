@@ -4,10 +4,8 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/context/globalContext";
 
-//@ts-ignore
 function FlyToActiveCity({ activeCityCords }: any) {
   const map = useMap();
-
   useEffect(() => {
     if (activeCityCords) {
       const zoomLev = 13;
@@ -26,12 +24,12 @@ function FlyToActiveCity({ activeCityCords }: any) {
   return null;
 }
 
-function Mapbox() {
+function MapBox() {
   const { foreCast } = useGlobalContext(); // Your coordinates
 
   const activeCityCords = foreCast?.coord;
 
-  if (!foreCast || !foreCast.coord || !activeCityCords) {
+  if (typeof window === "undefined" || !foreCast || !activeCityCords) {
     return (
       <div>
         <h1>Loading</h1>
@@ -60,4 +58,4 @@ function Mapbox() {
   );
 }
 
-export default Mapbox;
+export default MapBox;

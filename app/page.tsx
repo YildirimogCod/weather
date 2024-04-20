@@ -1,10 +1,11 @@
 "use client";
+import { useEffect } from "react";
 import AirPollution from "./Components/AirPollution/AirPollution";
 import DailyForecast from "./Components/DailyForecast/DailyForecast";
 import FeelsLike from "./Components/FeelsLike/FeelsLike";
 import FiveDayForecast from "./Components/FiveDayForecast/FiveDayForecast";
 import Humidity from "./Components/Humidity/Humudity";
-import MaxBox from "./Components/MapBox/MaxBox";
+import Mapbox from "./Components/MapBox/MapBox";
 import Population from "./Components/Population/Population";
 import Pressure from "./Components/Pressure/Pressure";
 import Sunset from "./Components/Sunset/Sunset";
@@ -19,13 +20,16 @@ import defaultStates from "./utils/defaultStates";
 export default function Home() {
   const { setActiveCityCoords } = useGlobalContextUpdate();
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, []);
   const getClickedCityCords = (lat: number, lon: number) => {
     setActiveCityCoords([lat, lon]);
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
   return (
     <main className="mx-[1rem] lg:mx-[2rem] xl:mx-[6rem] 2xl:mx-[16rem] m-auto">
@@ -49,7 +53,7 @@ export default function Home() {
             <Pressure />
           </div>
           <div className="mapbox-con flex gap-4 mt-4">
-            <MaxBox />
+            <Mapbox />
             <div className="states flex flex-col gap-3 flex-1">
               <h2>Top Large Cities</h2>
               <div className="flex flex-col gap-4">

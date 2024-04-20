@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { github } from "./utils/Icon";
+import React from "react";
 import { ModeToggle } from "./Components/ThemeDropdown/ThemeDropdown";
 import { useRouter } from "next/navigation";
 import SearchDialog from "./Components/SearchDialog/SearchDialog";
