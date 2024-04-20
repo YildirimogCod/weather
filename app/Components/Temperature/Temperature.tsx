@@ -19,14 +19,21 @@ const Temperature = () => {
   const { main, timezone, name, weather } = foreCast;
 
   useEffect(() => {
+    // upadte time every second
     const interval = setInterval(() => {
       const localMoment = moment().utcOffset(timezone / 60);
-      const formattedTime = localMoment.format("HH:mm:ss");
+      // custom format: 24 hour format
+      const formatedTime = localMoment.format("HH:mm:ss");
+      // day of the week
       const day = localMoment.format("dddd");
-      setLocalTime(formattedTime);
+
+      setLocalTime(formatedTime);
       setCurrentDay(day);
     }, 1000);
-  }, []);
+
+    // clear interval
+    return () => clearInterval(interval);
+  }, [timezone]);
   if (!foreCast || !weather) return <div>Loading</div>;
 
   const temp = kelvinToCelcius(main?.temp);
@@ -52,7 +59,10 @@ const Temperature = () => {
   };
 
   return (
-    <div className="pt-6 pb-5 px-3 border rounded-lg flex flex-col justify-between dark:bg-dark-grey shadow-sm dark:shadow-none">
+    <div
+      className="pt-6 pb-5 px-4 border rounded-lg flex flex-col 
+    justify-between dark:bg-dark-grey shadow-sm dark:shadow-none"
+    >
       <p className="flex justify-between items-center">
         <span className="font-medium">{currentDay}</span>
         <span className="font-medium">{localTime}</span>

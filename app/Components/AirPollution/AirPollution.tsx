@@ -13,16 +13,14 @@ const AirPollution = () => {
     !airQuality.list[0] ||
     !airQuality.list[0].main
   )
-    return (
-      <Skeleton className="h-[12rem] w-full col-span-2 md:col-span-full" />
-    );
+    return <Skeleton className="h-[12rem] w-full" />;
 
   const airQualityIndex = airQuality.list[0].main.aqi * 10;
-  console.log(airQualityIndex);
+
   const filteredQualityIndex = airQulaityIndexText.find((item) => {
     return item.rating === airQualityIndex;
   });
-  console.log(filteredQualityIndex);
+
   return (
     <div
       className="air-pollution pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8

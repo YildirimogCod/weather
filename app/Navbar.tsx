@@ -4,12 +4,10 @@ import { github } from "./utils/Icon";
 import { ModeToggle } from "./Components/ThemeDropdown/ThemeDropdown";
 import { useRouter } from "next/navigation";
 import { SearchDialog } from "./Components/SearchDialog/SearchDialog";
-import { useGlobalContext } from "./context/globalContext";
 
 const Navbar = () => {
   const router = useRouter();
-  const { state } = useGlobalContext();
-  console.log(state);
+
   return (
     <nav className="flex items-end justify-between py-3">
       <div className="left"></div>
