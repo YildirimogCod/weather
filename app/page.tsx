@@ -1,7 +1,9 @@
 import AirPollution from "./Components/AirPollution/AirPollution";
 import DailyForecast from "./Components/DailyForecast/DailyForecast";
 import FeelsLike from "./Components/FeelsLike/FeelsLike";
+import FiveDayForecast from "./Components/FiveDayForecast/FiveDayForecast";
 import Humidity from "./Components/Humidity/Humudity";
+import MaxBox from "./Components/MapBox/MaxBox";
 import Population from "./Components/Population/Population";
 import Pressure from "./Components/Pressure/Pressure";
 import Sunset from "./Components/Sunset/Sunset";
@@ -10,6 +12,7 @@ import UvIndex from "./Components/UvIndex/UvIndex";
 import Visibility from "./Components/Visibility/Visibility";
 import Wind from "./Components/Wind/Wind";
 import Navbar from "./Navbar";
+import defaultStates from "./utils/defaultStates";
 
 export default function Home() {
   return (
@@ -18,6 +21,7 @@ export default function Home() {
       <div className="pb-4 flex flex-col gap-4 md:flex-row">
         <div className="flex flex-col gap-4 w-full min-w-[18rem] md:w-[35rem]">
           <Temperature />
+          <FiveDayForecast />
         </div>
         <div className="flex flex-col w-full">
           <div className="instruments grid h-full gap-4 col-span-full sm-2:col-span-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -31,6 +35,24 @@ export default function Home() {
             <Humidity />
             <Visibility />
             <Pressure />
+          </div>
+          <div className="mapbox-con flex gap-4 mt-4">
+            <MaxBox />
+            <div className="states flex flex-col gap-3 flex-1">
+              <h2>Top Large Cities</h2>
+              <div className="flex flex-col gap-4">
+                {defaultStates.map((state, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="border rounded-lg cursor-pointer dark:bg-gray shadow-sm dark:shadow-none"
+                    >
+                      <p className="px-6 py-4">{state.name}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
