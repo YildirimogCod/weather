@@ -5,15 +5,14 @@ import {
 } from "@/app/context/globalContext";
 import { commandIcon } from "@/app/utils/Icon";
 import { Button } from "@/components/ui/button";
-import { Command, CommandInput } from "@/components/ui/command";
+import { Command, CommandInput, CommandList } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { CommandList } from "cmdk";
-import React from "react";
+import { useState } from "react";
 
 function SearchDialog() {
   const { geoCodedList, inputValue, handleInput } = useGlobalContext();
   const { setActiveCityCoords } = useGlobalContextUpdate();
-  const [hoveredIndex, setHoveredIndex] = React.useState<number>(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
   const getClickedCoords = (lat: number, lon: number) => {
     setActiveCityCoords([lat, lon]);
   };

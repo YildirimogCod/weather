@@ -8,9 +8,11 @@ export async function GET(req: NextRequest) {
     const lon = searchParams.get("lon");
 
     const dailyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
     const dailyRes = await fetch(dailyUrl, {
       next: { revalidate: 3600 },
     });
+
     const dailyData = await dailyRes.json();
     return NextResponse.json(dailyData);
   } catch (error) {

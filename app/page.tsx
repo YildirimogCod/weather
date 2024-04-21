@@ -53,7 +53,7 @@ export default function Home() {
             <Pressure />
           </div>
           <div className="mapbox-con flex gap-4 mt-4">
-            <Mapbox />
+            {/* <Mapbox /> */}
             <div className="states flex flex-col gap-3 flex-1">
               <h2>Top Large Cities</h2>
               <div className="flex flex-col gap-4">

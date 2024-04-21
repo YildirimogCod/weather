@@ -1,28 +1,8 @@
-"use client";
-import React, { useEffect } from "react";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import React from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/context/globalContext";
-
-function FlyToActiveCity({ activeCityCords }: any) {
-  const map = useMap();
-  useEffect(() => {
-    if (activeCityCords) {
-      const zoomLev = 13;
-      const flyToOptions = {
-        duration: 1.5,
-      };
-
-      map.flyTo(
-        [activeCityCords.lat, activeCityCords.lon],
-        zoomLev,
-        flyToOptions
-      );
-    }
-  }, [activeCityCords, map]);
-
-  return null;
-}
+import FlyToActiveCity from "../FlyToActiveCity/FlyToActiveCity";
 
 function MapBox() {
   const { foreCast } = useGlobalContext(); // Your coordinates
